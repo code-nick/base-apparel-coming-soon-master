@@ -2,24 +2,18 @@ import React from 'react'
 import logo from '../assets/images/logo.svg'
 import arrow from '../assets/images/icon-arrow.svg'
 import mobilehero from '../assets/images/hero-mobile.jpg'
+import { useState } from 'react'
 
 export default function Hero() {
-    const [message, setMessage] = useState("");
-  const validateEmail = (e) => {
-    var email = e.target.value;
+    const [value, setValue] = useState('')
+    const [text, setText] = useState(' ')
 
-    if (validator.isEmail(email)) {
-      setMessage("Thank you");
-    } else {
-      setMessage("Please, enter valid Email!");
+    const pattern = /^\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b$/i;
+    const inputValue = (e) => {
+        let inputVal = e.target.value
+        setValue(inputVal)
+
     }
-  };
-
-
-
-
-
-
 
     return (
         <main className='main'>
@@ -39,8 +33,14 @@ export default function Hero() {
                         <p>  Hello fellow shoppers! We're currently building our new fashion store.
                             Add your email below to stay up-to-date with announcements and our launch deals. </p>
                         <div className='main__content__text__details__search '>
-                            <input type="email" placeholder='Email Address' />
-                            <button>
+                            <input type="email" placeholder='Email Address' onChange={inputValue} />
+                            <button onClick={() => {
+                                if (pattern.test(value)) {
+                                    console.log('true');
+                                }else {
+                                    console.log('false');
+                                }
+                            }}>
                                 <img src={arrow} alt="image" />
                             </button>
                         </div>
